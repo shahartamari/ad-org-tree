@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "org-tree",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -34,5 +34,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Organization tree",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
