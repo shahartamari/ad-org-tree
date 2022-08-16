@@ -1,9 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 const auth = require("./auth");
+const config = require("./config");
 
 // Create Express App and Routes
 const app = express();
-app.get("/", (req, res) => {
+app.get("/", cors(config.corsOptions), (req, res) => {
   auth.getToken(auth.tokenRequest).then((response) => {
     
     res.send({

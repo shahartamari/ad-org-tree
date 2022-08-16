@@ -24,7 +24,7 @@ const apiConfig = {
  * Initialize a confidential client application. For more info, visit:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-node/docs/initialize-confidential-client-application.md
  */
-const cca = new msal.ConfidentialClientApplication(config);
+const cca = new msal.ConfidentialClientApplication(config.msalConfig);
 
 /**
  * Acquires token with client credentials.
@@ -35,7 +35,7 @@ async function getToken(tokenRequest) {
 }
 
 module.exports = {
-	apiConfig: apiConfig,
-	tokenRequest: tokenRequest,
-	getToken: getToken
+	apiConfig,
+	tokenRequest,
+	getToken
 };
