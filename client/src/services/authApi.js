@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 const authApi = createApi({
   reducerPath: "auth",
@@ -16,5 +16,4 @@ const authApi = createApi({
 });
 
 export const { getToken } = authApi.endpoints;
-export const { useGetTokenQuery } = authApi;
 export default authApi;

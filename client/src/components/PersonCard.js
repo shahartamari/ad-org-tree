@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import getProfilePhoto from '../services/getProfilePhoto'
+import { useGetPhotoMutation } from "../services/graphApi";
 
-const PersonCard = ({ displayName, email, role, department, id, token }) => {
-  
+const PersonCard = ({ displayName, email, role, department, id }) => {
   const [photoUrl, setPhotoUrl] = useState(null);
+  const [getPhoto] = useGetPhotoMutation(id);
 
-  const url = window.URL || window.webkitURL;
-  
   useEffect(() => {
-    getProfilePhoto(id, token).then((blob) => {
-      if (blob) {
-        setPhotoUrl (url.createObjectURL(blob));
+    getPhoto(id).then(({ data, error }) => {
+      if (error) {
+        setPhotoUrl("./avatar.png");
       } else {
-        setPhotoUrl('/avatar.png')
+        setPhotoUrl(data);
       }
-     
     });
+
     return () => {
-      url.revokeObjectURL(photoUrl);
+      URL.revokeObjectURL(photoUrl);
     };
   }, []);
 
@@ -26,7 +24,7 @@ const PersonCard = ({ displayName, email, role, department, id, token }) => {
       <div className="content">
         <div className="header">
           <div className="left floated ui avatar image">
-            <img alt="" src={photoUrl}/>
+            <img alt="" src={photoUrl} />
           </div>
           <a href={`mailto:${email}`}>{displayName}</a>
         </div>

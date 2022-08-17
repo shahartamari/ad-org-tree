@@ -1,11 +1,9 @@
 import React from "react";
 import PersonCard from "./PersonCard";
 import { useGetUsersQuery } from "../services/graphApi";
-import { useGetTokenQuery } from "../services/authApi";
 
 const OrgChart = () => {
   const { data, isSuccess, isError, error, isLoading } = useGetUsersQuery();
-  const token = useGetTokenQuery().data;
 
   return (
     <div className="ui cards">
@@ -13,17 +11,16 @@ const OrgChart = () => {
       {isError && <div className="negative">{error}</div>}
       {isSuccess &&
         data.map(({ displayName, department, jobTitle, mail, id }) => {
-
           return (
+            <React.Fragment key={id}>
             <PersonCard
               id={id}
               displayName={displayName}
               email={mail || null}
               department={department}
               role={jobTitle}
-              token={token}
- 
             />
+            </React.Fragment>
           );
         })}
     </div>

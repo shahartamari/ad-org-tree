@@ -18,13 +18,15 @@ const graphApi = createApi({
       transformResponse: (response) => response.value,
       providesTags: (result, error, id) => [{ type: GRAPH_TYPE, id }],
     }),
-    getProfilePhoto: builder.query({
-      query: (id) => `users/${id}/photos/48x48/$value`,
-      transformResponse: async (response) => await response.blob(),
+    getPhoto: builder.mutation({
+      query: (id) => ({
+        url: `users/${id}/photos/48x48/$value`,
+        responseHandler: (response) => response.blob().then(blob => URL.createObjectURL(blob))
+      }),
     }),
   }),
 });
 
 export default graphApi;
-export const { useGetUserQuery, useGetUsersQuery, useGetProfilePhotoQuery } =
+export const { useGetUserQuery, useGetUsersQuery, useGetPhotoMutation } =
   graphApi;
