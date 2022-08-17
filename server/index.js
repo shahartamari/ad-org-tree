@@ -17,10 +17,10 @@ app.get("/", cors(config.corsOptions), (req, res) => {
     res.send({
       status: 401
     });
-    return response;
+    return response.accessToken;
   });
 });
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 50000;
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
