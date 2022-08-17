@@ -9,7 +9,12 @@ const PersonCard = ({ displayName, email, role, department, id, token }) => {
   
   useEffect(() => {
     getProfilePhoto(id, token).then((blob) => {
-      blob && (setPhotoUrl (url.createObjectURL(blob)));
+      if (blob) {
+        setPhotoUrl (url.createObjectURL(blob));
+      } else {
+        setPhotoUrl('/avatar.png')
+      }
+     
     });
     return () => {
       url.revokeObjectURL(photoUrl);
@@ -17,10 +22,10 @@ const PersonCard = ({ displayName, email, role, department, id, token }) => {
   }, []);
 
   return (
-    <div className="card" key={id}>
+    <div className="ui card" key={id}>
       <div className="content">
         <div className="header">
-          <div className="ui avatar image left floated">
+          <div className="left floated ui avatar image">
             <img alt="" src={photoUrl}/>
           </div>
           <a href={`mailto:${email}`}>{displayName}</a>
