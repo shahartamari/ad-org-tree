@@ -1,0 +1,23 @@
+{
+  "name": "ad-org-tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd server&&npm run start\" \"cd client&&npm run start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahartamari/ad-org-tree.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shahartamari/ad-org-tree/issues"
+  },
+  "homepage": "https://github.com/shahartamari/ad-org-tree#readme",
+  "dependencies": {
+    "concurrently": "^7.3.0"
+  }
+}
