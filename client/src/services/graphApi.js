@@ -20,12 +20,12 @@ const graphApi = createApi({
     }),
     getUser: builder.query({
       query: (id) =>
-        `users/${id}?${selectProps}`,
+        `users/${id}?${selectProps}&$expand=manager($levels=max;${selectProps})`,
       providesTags: (result, error, id) => [{ type: GRAPH_TYPE, id }],
     }),
     searchUser: builder.query({
       query: (term) =>
-        `users/?$filter=startswith(displayName,'${term}')${selectProps}$expand=manager($levels=max;${selectProps})`,
+        `users/?$filter=startswith(displayName,'${term}')${selectProps}&$expand=manager($levels=max;${selectProps})`,
       transformResponse: (response) => response.value,
       providerTags: (result, error, id) => [{ type: GRAPH_TYPE, id }],
     }),

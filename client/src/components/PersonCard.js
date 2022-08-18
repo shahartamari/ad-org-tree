@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useGetPhotoMutation } from "../services/graphApi";
 
 const PersonCard = ({ displayName, mail, role, department, id }) => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [getPhoto] = useGetPhotoMutation(id);
-  const nav = useNavigate();
+ 
   useEffect(() => {
     getPhoto(id).then(({ data, error }) => {
       if (error) {

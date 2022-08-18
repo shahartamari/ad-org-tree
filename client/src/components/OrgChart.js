@@ -1,6 +1,6 @@
 import React from "react";
 import OrgPerson from "./OrgPerson";
-import PersonCard from "./PersonCard";
+
 import { useGetUsersQuery } from "../services/graphApi";
 
 const OrgChart = () => {
