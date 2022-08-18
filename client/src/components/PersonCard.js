@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useGetPhotoMutation } from "../services/graphApi";
 
 const PersonCard = ({ displayName, mail, role, department, id }) => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [getPhoto] = useGetPhotoMutation(id);
-
+  const nav = useNavigate();
   useEffect(() => {
     getPhoto(id).then(({ data, error }) => {
       if (error) {
@@ -26,11 +27,13 @@ const PersonCard = ({ displayName, mail, role, department, id }) => {
           <div className="left floated ui avatar image">
             <img alt="" src={photoUrl} />
           </div>
-        <a>{displayName}</a>
-         <a>{mail}</a> 
-          
+          <NavLink to={id}>{displayName}</NavLink>
         </div>
         <div className="meta">{role}</div>
+        <a href={`mailto:${mail}`} className="meta">
+          {mail}
+        </a>
+
         <div className="description">{department}</div>
       </div>
     </div>
