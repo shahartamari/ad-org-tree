@@ -6,6 +6,7 @@ const baseQuery = (token) =>
     baseUrl : `https://${process.env.REACT_APP_GRAPH_ENDPOINT}/${process.env.REACT_APP_GRAPH_VERSION}/`,
     prepareHeaders: (headers) => {
       headers.set("Authorization", `bearer ${token}`);
+      headers.set("ConsistencyLevel", "eventual");
       return headers;
     },
   });

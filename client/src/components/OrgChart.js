@@ -1,4 +1,5 @@
 import React from "react";
+import OrgPerson from "./OrgPerson";
 import PersonCard from "./PersonCard";
 import { useGetUsersQuery } from "../services/graphApi";
 
@@ -13,13 +14,7 @@ const OrgChart = () => {
         data.map(({ displayName, department, jobTitle, mail, id }) => {
           return (
             <React.Fragment key={id}>
-            <PersonCard
-              id={id}
-              displayName={displayName}
-              email={mail || null}
-              department={department}
-              role={jobTitle}
-            />
+              <OrgPerson userId={id} />
             </React.Fragment>
           );
         })}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useGetPhotoMutation } from "../services/graphApi";
 
-const PersonCard = ({ displayName, email, role, department, id }) => {
+const PersonCard = ({ displayName, mail, role, department, id }) => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [getPhoto] = useGetPhotoMutation(id);
 
@@ -26,7 +26,9 @@ const PersonCard = ({ displayName, email, role, department, id }) => {
           <div className="left floated ui avatar image">
             <img alt="" src={photoUrl} />
           </div>
-          <a href={`mailto:${email}`}>{displayName}</a>
+        <a>{displayName}</a>
+         <a>{mail}</a> 
+          
         </div>
         <div className="meta">{role}</div>
         <div className="description">{department}</div>
