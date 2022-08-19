@@ -3,3 +3,8 @@
 .ui.card .meta {
     font-size: 0.85em;
 }
+
+.org-chart li {
+    list-style: none;
+    
+}

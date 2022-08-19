@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetUserQuery } from "../services/graphApi";
+import DirectReports from "./DirectReports";
 import PersonCard from "./PersonCard";
-
 
 const OrgPerson = ({ userId }) => {
   const { id } = useParams();
@@ -12,20 +12,18 @@ const OrgPerson = ({ userId }) => {
   );
 
   return (
-    < >
-   
+    <>
       {isLoading && <div>Loading...</div>}
       {isError && <div className="negative">{error}</div>}
       {isSuccess && (
-        <PersonCard
-          mail={data.mail}
-          displayName={data.displayName}
-          role={data.jobTitle}
-          department={data.department}
-          id={data.id}
-        />
+        <>
+          <li>
+            <PersonCard {...data} />
+          </li>
+          <DirectReports id={id} />
+        </>
       )}
-   </>
+    </>
   );
 };
 

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useGetPhotoMutation } from "../services/graphApi";
 
-const PersonCard = ({ displayName, mail, role, department, id }) => {
+const PersonCard = ({ displayName, mail, jobTitle, department, id }) => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [getPhoto] = useGetPhotoMutation(id);
+  const nav = useNavigate();
 
   useEffect(() => {
     getPhoto(id).then(({ data, error }) => {
@@ -23,16 +24,19 @@ const PersonCard = ({ displayName, mail, role, department, id }) => {
   return (
     <div className="ui card" key={id}>
       <div className="content">
-        <div className="">
+        <button className="ui button right floated small icon" onClick={()=>{nav(`/Org/${id}`)}}>
+          <i className="icon users"></i>
+        </button>
+        <div>
           <div className="left floated ui avatar image">
             <img alt="" src={photoUrl} />
           </div>
           <div>
             <h4 className="ui header">
-              <NavLink className="" to={id}>
+              <NavLink className="" to={`/${id}`}>
                 {displayName}
               </NavLink>
-              <div className="meta">{role}</div>
+              <div className="meta">{jobTitle}</div>
             </h4>
           </div>
         </div>

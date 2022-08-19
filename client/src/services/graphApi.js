@@ -12,20 +12,24 @@ const graphApi = createApi({
     getUsers: builder.query({
       query: () => `users?${selectProps}`,
       transformResponse: (response) => response.value,
-      providesTags: (result, error, arg) => 
+      providesTags: (result, error, arg) =>
         result
           ? [...result.map((id) => ({ type: GRAPH_TYPE, id })), GRAPH_TYPE]
-          : [GRAPH_TYPE]
-      
+          : [GRAPH_TYPE],
     }),
     getUser: builder.query({
       query: (id) =>
-        `users/${id}?${selectProps}&$expand=manager($levels=max;${selectProps})`,
+        `users/${id}?${selectProps}&$expand=manager($levels=max;${selectProps})&$count=true`,
       providesTags: (result, error, id) => [{ type: GRAPH_TYPE, id }],
+    }),
+    getDirectReports: builder.query({
+      query: (id) => `users/${id}/directReports?${selectProps}`,
+      providesTags: (result, error, id) => [{ type: GRAPH_TYPE, id }],
+      transformResponse: (response) => response.value,
     }),
     searchUser: builder.query({
       query: (term) =>
-        `users/?$filter=startswith(displayName,'${term}')${selectProps}&$expand=manager($levels=max;${selectProps})`,
+        `users/?$filter=startswith(displayName,'${term}')${selectProps}`,
       transformResponse: (response) => response.value,
       providerTags: (result, error, id) => [{ type: GRAPH_TYPE, id }],
     }),
@@ -41,5 +45,9 @@ const graphApi = createApi({
 });
 
 export default graphApi;
-export const { useGetUserQuery, useGetUsersQuery, useGetPhotoMutation } =
-  graphApi;
+export const {
+  useGetUserQuery,
+  useGetUsersQuery,
+  useGetPhotoMutation,
+  useGetDirectReportsQuery,
+} = graphApi;

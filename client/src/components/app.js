@@ -2,8 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "../style/app.css";
 import OrgChart from "./OrgChart";
-import OrgPerson from "./OrgPerson";
+import PersonTree from "./PersonTree";
 import Home from "./Home";
+import OrgPerson from "./OrgPerson";
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="chart" element={<OrgChart />} />
-        <Route path=":id" element={<OrgPerson />} />
+        <Route path=":id" element={<PersonTree />} />
+        <Route path="Org/:id" element ={<OrgPerson />} />
       </Routes>
     </div>
   );
