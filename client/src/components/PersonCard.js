@@ -5,7 +5,7 @@ import { useGetPhotoMutation } from "../services/graphApi";
 const PersonCard = ({ displayName, mail, role, department, id }) => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [getPhoto] = useGetPhotoMutation(id);
- 
+
   useEffect(() => {
     getPhoto(id).then(({ data, error }) => {
       if (error) {
@@ -23,16 +23,19 @@ const PersonCard = ({ displayName, mail, role, department, id }) => {
   return (
     <div className="ui card" key={id}>
       <div className="content">
-        <div className="header">
+        <div className="">
           <div className="left floated ui avatar image">
             <img alt="" src={photoUrl} />
           </div>
-          <NavLink to={id}>{displayName}</NavLink>
+          <div>
+            <h4 className="ui header">
+              <NavLink className="" to={id}>
+                {displayName}
+              </NavLink>
+              <div className="meta">{role}</div>
+            </h4>
+          </div>
         </div>
-        <div className="meta">{role}</div>
-        <a href={`mailto:${mail}`} className="meta">
-          {mail}
-        </a>
 
         <div className="description">{department}</div>
       </div>

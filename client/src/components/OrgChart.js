@@ -1,20 +1,24 @@
 import React from "react";
-import OrgPerson from "./OrgPerson";
+import PersonCard from "./PersonCard";
 
-import { useGetUsersQuery } from "../services/graphApi";
-
-const OrgChart = () => {
-  const { data, isSuccess, isError, error, isLoading } = useGetUsersQuery();
-
+const OrgChart = ({ data, isSuccess, isError, error, isLoading }) => {
+  
   return (
     <div className="ui cards">
       {isLoading && <div> loading... </div>}
       {isError && <div className="negative">{error}</div>}
       {isSuccess &&
-        data.map(({ displayName, department, jobTitle, mail, id }) => {
+        data.map((user) => {
           return (
-            <React.Fragment key={id}>
-              <OrgPerson userId={id} />
+            <React.Fragment key={user.id}>
+              <PersonCard
+                mail={user.mail}
+                displayName={user.displayName}
+                role={user.jobTitle}
+                department={user.department}
+                id={user.id}
+                manager={user.manager}
+              />
             </React.Fragment>
           );
         })}

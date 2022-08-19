@@ -3,15 +3,17 @@ import { useParams } from "react-router-dom";
 import { useGetUserQuery } from "../services/graphApi";
 import PersonCard from "./PersonCard";
 
+
 const OrgPerson = ({ userId }) => {
-  const {id} = useParams();
+  const { id } = useParams();
 
   const { data, isLoading, isSuccess, isError, error } = useGetUserQuery(
     userId || id
   );
 
   return (
-    <>
+    < >
+   
       {isLoading && <div>Loading...</div>}
       {isError && <div className="negative">{error}</div>}
       {isSuccess && (
@@ -23,7 +25,7 @@ const OrgPerson = ({ userId }) => {
           id={data.id}
         />
       )}
-    </>
+   </>
   );
 };
 
